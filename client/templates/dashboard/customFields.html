@@ -1,0 +1,115 @@
+<template name='customFields'>
+  <div class='row'>
+    <h2 class='text-center'>Custom Product Fields</h2>
+    <p>Product Importer supports the importing of your custom fields, you just need to help us map them out. You need to tell us what the column name is, what the field name is on your products, what type of value you are inserting and finally where to put this (top level product, grouping variant or bottom variant)</p>
+  </div>
+  {{#if anyCustomFields}}
+    <div class='row'>
+      <h3 class='text-center'>Current Custom Fields</h3>
+    </div>
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Column Name</th>
+          <th>Products Field</th>
+          <th>Value Type</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each customTopProducts}}
+          <tr>
+            <td>Top Level Product</td>
+            <td>{{csvColumnName}}</td>
+            <td>{{productFieldName}}</td>
+            <td>{{valueType}}</td>
+            <td><a href='#' class='remove' data-level='topProduct' data-csv-column-name={{csvColumnName}} data-product-field-name={{productFieldName}} data-value-type={{valueType}}><i class="fa fa-trash-o"></i></a></td>
+          </tr>
+        {{/each}}
+        {{#each customMidVariant}}
+          <tr>
+            <td>Middle Level (Grouping) Variant</td>
+            <td>{{csvColumnName}}</td>
+            <td>{{productFieldName}}</td>
+            <td>{{valueType}}</td>
+            <td><a href='#' class='remove' data-level='midVariant' data-csv-column-name={{csvColumnName}} data-product-field-name={{productFieldName}} data-value-type={{valueType}}><i class="fa fa-trash-o"></i></a></td>
+          </tr>
+        {{/each}}
+        {{#each customVariant}}
+          <tr>
+            <td>Bottom Level Variant</td>
+            <td>{{csvColumnName}}</td>
+            <td>{{productFieldName}}</td>
+            <td>{{valueType}}</td>
+            <td><a href='#' class='remove' data-level='variant' data-csv-column-name={{csvColumnName}} data-product-field-name={{productFieldName}} data-value-type={{valueType}}><i class="fa fa-trash-o"></i></a></td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{/if}}
+  <div class='row'>
+    <h3 class='text-center'>Add Custom Fields</h3>
+    <form class='' id='customFieldsForm'>
+      <div class="form-group">
+        <label for="columnName">CSV Column Name</label>
+        <input required name='columnName'  class="form-control" id="columnName" placeholder="Additional Column Name">
+      </div>
+      <div class="form-group">
+        <label for="productField">Product Collection Field's Name</label>
+        <input required name="productField"  class="form-control" id="productField" placeholder="Products Collection Field's Name">
+      </div>
+      <div class="form-group">
+        <label for='typeSelector'>Value Type</label>
+        <select required name='typeSelector' id='typeSelector' class="form-control">
+          <option value='string'>String</option>
+          <option value='number'>Number</option>
+          <option value='boolean'>Boolean</option>
+          <option value='array'>Array</option>
+          <option value='object'>Object</option>
+        </select>
+      </div>
+      {{#if arrayOrObject}}
+        <div class="form-group">
+          <label for="delimiterSymbol">Delimiter Symbol</label>
+          <input required name='delimiterSymbol'  class="form-control"  placeholder="Symbol that delimits (separates)values">
+        </div>
+        <div class="form-group">
+          <label for='arrayTypeSelector'>Array/Object Value Type</label>
+          <select required name='optionTypeSelector' id='optionTypeSelector' class="form-control">
+            <option value='string'>String</option>
+            <option value='number'>Number</option>
+            <option value='boolean'>Boolean</option>
+            {{#if ifArray}}
+              <option value='object'>Object</option>
+            {{/if}}
+          </select>
+        </div>
+        {{#if arrayOfObjects}}
+          <p>Example of a Column that has array of Objects:
+          <code>a=1 $ b=hello $ c=true | a=2 $ b=bye $ c=false</code></p>
+          <p>Where <code>|</code> is the top delimiter, <code> $</code> is the key value delimiter. And the Property Count would be 3.</p>
+          <p>Value of Property 1 would be <code>Number</code></p>
+          <div class='form-group'>
+            <label for="objectPropertiesCount">Number of Propeties in Each Object</label>
+            <input name='objectPropertiesCount' type="number" id='objectPropertiesCount' class="form-control"  placeholder="Ex {a: 1, b: 2, c: true} then enter 3!">
+          </div>
+          <div class='form-group'>
+            <label for="objectPropertiesDelimiter">Delimiter Between Each Object</label>
+            <input name='objectPropertiesDelimiter'  id='objectPropertiesDelimiter' class="form-control"  placeholder="Ex a=1 $ b=2 $ c=true  then enter $ ** This cannot be same as Array Delimiter Above">
+          </div>
+          {{{valuesOfObjects}}}
+        {{/if}}
+      {{/if}}
+      <div class="form-group">
+        <label for='productSelector'>Product/Variant Type</label>
+        <select  required name='productSelector' id='productSelector' class="form-control">
+          <option value='topProduct'>Top Level Product</option>
+          <option value='midVariant'>Grouping Variant</option>
+          <option value='variant'>Variant</option>
+        </select>
+      </div>
+      <button type="submit" class="customFieldsForm btn btn-default">Submit</button>
+    </form>
+  </div>
+</template>

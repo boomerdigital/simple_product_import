@@ -1,0 +1,104 @@
+<template name='dashboardProductImporter'>
+  <div class='container'>
+    <h1 class='text-center'>Product Importer</h1>
+    <p>Product Importer allows you to bulk upload products from a CSV file. Each CSV requires a column called ProductId that groups variants together. Then you make the second level variant whatever you want and the third variant whatever you want. You can also control the mapping from one column to a corresponding DB field, or name your columns to correspond</p>
+    <div class='row text-center' style="padding-bottom: 30px" >
+      <form id="import-products-csv-form" class="form-inline">
+        <h4>Import products from CSV file.</h4>
+        <label for="csvImportProductsFile">CSV File</label>
+        <input type="file" accept=".csv" name="csvImportProductsFile" id="csvImportProductsFile" class="form-control btn" />
+        <button type="submit" class="btn btn-default form-control" style="padding-bottom: 5px">Import CSV File</button>
+      </form>
+    </div>
+    {{#if importingProducts}}
+      <div class='row' >
+        <h2 class='text-center'><em>Improrting Products from CSV  <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        <span class="sr-only">Loading..</span></em></h2>
+      </div>
+    {{/if}}
+    <div class='row'>
+      <h4>Special Syntaxes</h4>
+      <ol>
+        <li><strong>top level</strong> - there are certain fields that only apply to top level products (topProdctType, pageTitle, handle, hashtags, metafields, description) these <strong>need</strong> to be on the first of each product but can be filled out for each item. </li>
+        <li><strong>hashtags</strong> - each hashtag need to be separated by a <strong>,</strong></li>
+        <li><strong>metafields</strong> - each key value pair need to be separated by <strong> | </strong> and each key needs to be separated from value by <strong>=</strong></li>
+        <li><strong>Custom Arrays</strong> - can be split by whatever sybmol you enter into the delimiting field</li>
+        <li><strong>Custom Objects</strong> - can be delimited by any field but key values must be separated by <strong>=</strong></li>
+      </ol>
+    </div>
+  </div>
+  <div class='container'>
+    <div class='table-responsive row'>
+      <h2 class='text-center'>CSV Example  For Basic Template</h2>
+        <table class="table table-bordered table-hover ">
+          <thead>
+            <tr>
+              <th>productId</th>
+              <th>topProductType</th>
+              <th>productTitle</th>
+              <th>pageTitle</th>
+              <th>vendor</th>
+              <th>handle</th>
+              <th>variantTitle</th>
+              <th>variantType</th>
+              <th>title</th>
+              <th>optionTitle</th>
+              <th>price</th>
+              <th>qty</th>
+              <th>weight</th>
+              <th>taxable</th>
+              <th>hashtags</th>
+              <th>metafields</th>
+              <th>description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>simple</td>
+              <td>Basic Reaction Product</td>
+              <td>This is a basic product. You can do a lot with it.</td>
+              <td>Example Manufacturer</td>
+              <td>example-product</td>
+              <td>Basic Example Variant</td>
+              <td>variant</td>
+              <td>Option 1 - Red Dwarf</td>
+              <td>Red</td>
+              <td>19.99</td>
+              <td>19</td>
+              <td>35</td>
+              <td>true</td>
+              <td>Womens, Red</td>
+              <td>Material=Cotton | Quality=Excellent</td>
+              <td>Sign in as administrator to edit.\nYou can clone this product from the product grid.</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td class="warning"></td>
+              <td>Basic Reaction Product</td>
+              <td class="warning"></td>
+              <td>Example Manufacturer</td>
+              <td class="warning"></td>
+              <td>Basic Example Variant</td>
+              <td>variant</td>
+              <td>Option 2 - Green Tomato</td>
+              <td>Green</td>
+              <td>12.99,</td>
+              <td>42</td>
+              <td>35</td>
+              <td>true</td>
+              <td class="warning"></td>
+              <td class="warning"></td>
+              <td class="warning"></td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+  <div class='container'>
+    <div class='row text-center'>
+      <h2 >Download CSV Example Template</h2>
+      <a href='#' class='btn btn btn-lg btn-default downloadSample'>Download</a>
+    </div>
+  </div>
+</template>

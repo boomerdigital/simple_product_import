@@ -1,0 +1,27 @@
+{
+  "name": "simple-product-importer",
+  "version": "1.0.0",
+  "description": "CSV import for simple products for Reaction Commerce",
+  "main": "register.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+     "test": "./node_modules/.bin/mocha --reporter spec"
+  },
+  "dependencies": {
+    "papaparse": "4.3.2",
+    "mocha": "3.4.1",
+    "chai": "3.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/boomerdigital/simple_product_import.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/boomerdigital/simple_product_import/issues"
+  },
+  "homepage": "https://github.com/boomerdigital/simple_product_import#readme"
+}
