@@ -14,8 +14,7 @@
     "meteor-node-stubs": "~0.2.0",
     "react": "^15.1.0",
     "react-addons-pure-render-mixin": "^15.1.0",
-    "react-dom": "^15.1.0",
-    "meteor-check": "1.0.6"
+    "react-dom": "^15.1.0"
   },
   "repository": {
     "type": "git",
@@ -32,8 +31,6 @@
     "babel-register": "^6.24.1",
     "chai": "^3.5.0",
     "mocha": "^3.4.1",
-    "sinon": "^2.2.0",
-    "sinon-chai": "^2.10.0",
     "testdouble": "^2.1.2"
   }
 }
