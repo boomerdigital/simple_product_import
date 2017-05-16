@@ -7,12 +7,15 @@
     "test": "tests"
   },
   "scripts": {
-     "test": "./node_modules/.bin/mocha --reporter spec"
+    "test": "mocha ./tests --compilers js:babel-register"
   },
   "dependencies": {
     "papaparse": "4.3.2",
-    "mocha": "3.4.1",
-    "chai": "3.5.0"
+    "meteor-node-stubs": "~0.2.0",
+    "react": "^15.1.0",
+    "react-addons-pure-render-mixin": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "meteor-check": "1.0.6"
   },
   "repository": {
     "type": "git",
@@ -23,5 +26,14 @@
   "bugs": {
     "url": "https://github.com/boomerdigital/simple_product_import/issues"
   },
-  "homepage": "https://github.com/boomerdigital/simple_product_import#readme"
+  "homepage": "https://github.com/boomerdigital/simple_product_import#readme",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "chai": "^3.5.0",
+    "mocha": "^3.4.1",
+    "sinon": "^2.2.0",
+    "sinon-chai": "^2.10.0",
+    "testdouble": "^2.1.2"
+  }
 }

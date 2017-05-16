@@ -25,7 +25,7 @@ ProductImporter.anyCustomFields = function (level) {
     return false;
   }
   let productImporter = ReactionCore.Collections.Packages.findOne({
-    name: 'reaction-product-importer',
+    name: 'simple-product-importer',
     shopId: ReactionCore.getShopId()
   });
   if (productImporter) {

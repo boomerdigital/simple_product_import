@@ -49,7 +49,6 @@ Template.dashboardProductImporter.events({
     });
   },
   'click .downloadSample': function (event) {
-    alert("Clicked download sample");
     event.preventDefault();
     let data = [{
       productId: '1',
@@ -67,16 +66,35 @@ Template.dashboardProductImporter.events({
       weight: '35',
       taxable: 'true',
       hashtags: 'Hashtags, Womens, Red',
-      metafields: 'Material=Cotten | Quality=Excellent',
+      metafields: 'Material=Cotton | Quality=Excellent',
       description: 'Sign in as administrator to edit.\nYou can clone this product from the product grid.'
-    }];
+    },
+      {
+      productId: '1',
+      productTitle: 'Basic Reaction Product',
+      vendor: 'Example Manufacturer',
+      variantTitle: 'Basic Example Variant',
+      variantType: 'variant',
+      title: 'Option 2 - Green Tomato',
+      optionTitle: 'Green',
+      price: '12.99',
+      qty: '19',
+      weight: '35',
+      taxable: 'true',
+  }];
     let unparse = Papa.unparse(data);
-    // let unparse = Pap.unparse(data);
     let csvData = new Blob([unparse], {type: 'text/csv;charset=utf-8;'});
-    let csvURL = window.URL.createObjectURL(csvData);
-    let tempLink = document.createElement('a');
-    tempLink.href = csvURL;
-    tempLink.setAttribute('download', 'productImporterTemplate.csv');
-    tempLink.click();
+    let filename="productImportSample.csv";
+    if (window.navigator.msSaveOrOpenBlob)  // IE hack; see http://msdn.microsoft.com/en-us/library/ie/hh779016.aspx
+      window.navigator.msSaveBlob(csvData, filename);
+    else
+    {
+      var a = window.document.createElement("a");
+      a.href = window.URL.createObjectURL(csvData, {type: "text/plain"});
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();  // IE: "Access is denied"; see: https://connect.microsoft.com/IE/feedback/details/797361/ie-10-treats-blob-url-as-cross-origin-and-denies-access
+      document.body.removeChild(a);
+    }
   }
 });

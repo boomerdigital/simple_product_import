@@ -24,20 +24,9 @@ ProductImporter.existingProduct = function (product, type = 'variant') {
   });
 };
 
+//Not supported
 ProductImporter.anyCustomFields = function (level) {
-  check(level, String);
-  let validLevels = ['topProduct', 'midVariant', 'variant'];
-  if (!_.contains(validLevels, level)) {
-    Logger.warn('Customized Import does not match level');
-    return false;
-  }
-  let productImporter = Packages.findOne({
-    name: 'reaction-product-importer',
-    shopId: Reaction.getShopId()
-  });
-  if (productImporter) {
-    return productImporter.settings.customFields[level].length >= 1;
-  }
+  return false;
 };
 ProductImporter.customFields = function (level) {
   check(level, String);
@@ -48,7 +37,7 @@ ProductImporter.customFields = function (level) {
     return false;
   }
   let productImporter = Packages.findOne({
-    name: 'reaction-product-importer',
+    name: 'simple-product-importer',
     shopId: Reaction.getShopId()
   });
   if (productImporter && productImporter.settings && productImporter.settings.customFields) {
