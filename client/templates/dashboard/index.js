@@ -1,4 +1,3 @@
-import './customFields';
 import './dashboard';
 
 
